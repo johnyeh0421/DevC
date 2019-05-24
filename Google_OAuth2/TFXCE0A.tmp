@@ -1,0 +1,273 @@
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <iphlpapi.h>
+#include <windows.h>
+#include <winsock.h>
+#include <malloc.h> 
+#include <direct.h>
+#include <stdio.h>
+
+#define WRITE_MAX_LEN	2048
+#define READ_MAX_LEN	8192
+
+#define MAX_TICK_CNT				4
+#define SWITCH_ROUTINE_TICK_CNT		4
+
+const index_html[] = "index.html";
+
+
+size_t ret;
+char writebuf[WRITE_MAX_LEN+1];
+char readbuf[READ_MAX_LEN+1];
+char readfiletmp[1024];
+
+
+typedef  enum {
+	SEND_NONE,
+	RESPONSE_HTML
+}e_socket_response_t;
+
+int		counti; 
+int 		countj;
+int 		cont_tmp_len;
+#define SWITCH_NOT_RETURN			0xFFFFFFFF
+#define MAX_SEND_LEN				(2000)
+int fs_fix_byte(char *dest,const char *source, int count){
+	
+	int	k,m;
+	k=0;
+	m=0;
+
+	loop:
+        if(count+k>MAX_SEND_LEN+1)
+            return k;
+		if(source[m] == '\0' )
+		    return k;
+		else
+			dest[k++]=source[m++];
+	goto loop;
+}
+
+int fs_switch_com(char *dest, char *source , e_socket_response_t idx, char *b, unsigned int max_send_len){
+	
+	#define tx_string_byte(x) 			 countj+=fs_fix_byte(dest+countj,(const char *)x, countj)
+	char show_str[256];
+
+	switch(idx) {
+
+		case RESPONSE_HTML:
+			switch(*b) {
+				case '0':
+					switch(*(b+1)) {
+						case '0':
+							sprintf(show_str , "john");
+							break;
+						case '1':
+							sprintf(show_str , "yehhhhhhhhhhhhh");
+							break;
+						case '2':
+							sprintf(show_str , "test");
+							break;
+					}
+					tx_string_byte(show_str);
+				case '1':
+
+					tx_string_byte(show_str);
+					break;
+				case '2':
+
+					tx_string_byte(show_str);
+					break;
+			}
+			break;
+	}
+
+	if(countj >= max_send_len) {
+		countj = cont_tmp_len;
+		return (counti - 2);
+	}
+	return SWITCH_NOT_RETURN;
+}
+
+int fs_loadfixfile(char *dest, char *source , e_socket_response_t idx, WORD max_send_len) {
+	
+	int fs_switch_return;
+	char b[4];
+
+	loop:
+	
+	if(countj >= max_send_len || source[counti] == 0) {
+		dest[countj] = '\0';
+		return counti; 
+	}
+	
+	if(source[counti] != '@') {
+		dest[countj] = source[counti]; 
+		cont_tmp_len=countj;
+		++countj; 
+	}
+	else{ 
+		if(source[counti] == '@') {
+				if(source[counti + 1] == 0 || source[counti + 2] == 0) {
+					dest[countj] = '\0'; 
+					return counti;
+				}
+				cont_tmp_len=countj;
+				b[0]=source[++counti];
+				b[1]=source[++counti];
+				b[2]=0;
+				fs_switch_return = fs_switch_com(dest, source, idx, b, max_send_len);
+		}
+		if(fs_switch_return != SWITCH_NOT_RETURN) {
+			counti = fs_switch_return ;
+			dest[countj] = '\0'; 
+			return fs_switch_return;
+		}	
+	}
+		
+	++counti;	
+	goto loop;
+}
+
+int check_send_len(e_socket_response_t idx){
+
+	switch(idx){
+
+		case RESPONSE_HTML:
+			memset(writebuf, 0 , sizeof(writebuf));
+			fs_loadfixfile(writebuf , (char*)readfiletmp , RESPONSE_HTML , MAX_SEND_LEN);
+			countj = 0;
+			return strlen(writebuf);
+			break;
+		default:
+			return 0;
+			break;
+	}
+}
+
+
+
+
+void readHtmlData(SOCKET client_sockfd, char* fname){
+	FILE *fdatap,*fout;
+	char ofilename[100];
+	int len = 0;
+	counti = 0; 
+	countj = 0;
+	send(client_sockfd, "HTTP/1.1 200 OK\r\n\r\n", strlen("HTTP/1.1 200 OK\r\n\r\n"), 0);
+
+	sprintf(ofilename,"WebPages/%s",fname);
+	fdatap = fopen(ofilename,"rb");
+	//fout = fopen("WebPages/fout.html","wb");
+	do{
+		memset(readfiletmp , 0 , sizeof(readfiletmp));
+		ret = fread(readfiletmp, 1, 1024, fdatap);
+		len = check_send_len(RESPONSE_HTML);
+		printf("writebuf:%d\n%s\n\n",len,writebuf);
+		send(client_sockfd, writebuf, len, 0);
+		//fwrite (writebuf , sizeof(char), ret, fout);
+		//printf("writebuf:%d\n%s\n\n",ret,writebuf);
+	}
+	while(ret>0);
+	fclose(fdatap);
+	//fclose(fout);
+}
+
+int main() {
+
+	SOCKET server_sockfd, client_sockfd;
+	int server_len, client_len;
+	struct sockaddr_in server_address;
+	struct sockaddr_in client_address;
+
+	// 註冊 Winsock DLL
+	WSADATA wsadata;
+	if(WSAStartup(0x101,(LPWSADATA)&wsadata) != 0) {
+		printf("Winsock Error\n");
+		exit(1);                                         
+	}
+
+	// 產生 server socket
+	server_sockfd = socket(AF_INET, SOCK_STREAM, 0); // AF_INET(使用IPv4); SOCK_STREAM; 0(使用預設通訊協定，即TCP)
+	if(server_sockfd == SOCKET_ERROR) {
+		printf("Socket Error\n");
+		exit(1);
+	}
+
+	char input_ip[20];
+	char input_port[20];
+//	printf("請輸入電腦IP位址 : ");
+//	scanf("%s",&input_ip);
+//	printf("\n");
+//	printf("請輸入Port : ");
+//	scanf("%s",&input_port);
+//	printf("\n");
+
+	sprintf(input_ip,"127.0.0.1");
+	sprintf(input_port,"100");
+	printf("請輸入電腦IP位址 : %s\n",input_ip);
+	printf("請輸入Port : %s\n",input_port);
+	
+	server_address.sin_family = AF_INET;					//AF_INT(使用IPv4)
+	server_address.sin_addr.s_addr = inet_addr(input_ip);		//IP根據電腦網卡進行設定，電腦目前是192.168.1.7，因此server IP就必須是192.168.1.7 
+	server_address.sin_port = htons(atoi(input_port));		//設定埠號 atoi 字串轉 int
+	server_len = sizeof(server_address);
+
+
+	if(bind(server_sockfd, (struct sockaddr *)&server_address, server_len) < 0) {
+		printf("Bind Error\n");
+		exit(1);
+	}
+
+	if(listen(server_sockfd, 5) < 0) {
+		printf("Listen Error\n");
+		exit(1);
+	}
+
+	unsigned char tick = 0, switch_task_tick = 0; 
+	while(1) {
+
+		tick = ((tick+1)%MAX_TICK_CNT);
+		switch_task_tick = (tick%SWITCH_ROUTINE_TICK_CNT); 
+
+		switch(switch_task_tick) {
+				case 0: 
+					printf("0\n");
+					printf("Server waiting...\n");
+					client_len = sizeof(client_address);
+
+					client_sockfd = accept(server_sockfd, (struct sockaddr *)&client_address, &client_len);
+					if(client_sockfd == SOCKET_ERROR) {
+						printf("Accept Error\n");
+						exit(1);
+					}
+					memset(readbuf,0,READ_MAX_LEN);
+					recv(client_sockfd, readbuf, READ_MAX_LEN, 0);
+					printf("%s\n",readbuf);
+					char *GET_ptr = strstr(readbuf , "GET /");
+					char *HTTP_ptr = strstr(readbuf , "HTTP");
+					if(GET_ptr && HTTP_ptr && strstr(readbuf, index_html)){
+						readHtmlData(client_sockfd,index_html);
+					}
+					else{
+						send(client_sockfd, "HTTP/1.1 200 OK\r\n\r\nFAIL", strlen("HTTP/1.1 200 OK\r\n\r\nFAIL"), 0);
+					}
+					closesocket(client_sockfd);
+					break;
+				case 1: 
+					printf("1\n");
+					break;
+				case 2: 
+					printf("2\n");
+					break;
+				case 3: 
+					printf("3\n");
+					break;
+
+		}
+		sleep(100);
+	}
+	
+	system("Pause");
+}
+

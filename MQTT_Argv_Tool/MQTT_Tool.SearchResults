@@ -1,0 +1,6 @@
+---- cps_private_key Matches (6 in 1 files) ----
+Pkparse.c (mbedtls_lib\library):const char cps_private_key[] = CPS_CLOUD_PRIVATE;
+Pkparse.c (mbedtls_lib\library):const size_t cps_private_key_len = sizeof( cps_private_key );
+Pkparse.c (mbedtls_lib\library):	*buf = malloc(cps_private_key_len);
+Pkparse.c (mbedtls_lib\library):	strcpy((char *)*buf , (const char *)cps_private_key);
+Pkparse.c (mbedtls_lib\library):	*n = cps_private_key_len;

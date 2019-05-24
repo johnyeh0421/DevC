@@ -1,0 +1,9 @@
+---- user_email Matches (10 in 3 files) ----
+Function.c (common\src):								tx_string_byte(Oauth_info.user_email);
+Main.c:							sprintf(g_send_buf, "HTTP/1.1 200 OK\r\n\r\n%s",Oauth_info.user_email);
+Main.c:						memset(Oauth_info.user_email,0,sizeof(Oauth_info.user_email));
+Main.c:						if(pickupJsonItem(g_recv_buf,Oauth_info.user_email,"email")){
+Main.c:						printf("\nUser_Email(%d) = \n%s\n",strlen(Oauth_info.user_email), Oauth_info.user_email);
+Main.c:						offset_len += sprintf(g_body_buf+offset_len ,"From: John Yeh <%s>\r\n", Oauth_info.user_email);
+Main.c:						send_offset_len += sprintf(g_send_buf+send_offset_len, "POST /upload/gmail/v1/users/%s/messages/send HTTP/1.1\r\n", Oauth_info.user_email);
+Variable.h (common\inc):	char user_email[128];

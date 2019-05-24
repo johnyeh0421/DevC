@@ -1,0 +1,279 @@
+# Project: SocketServer
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = 
+OBJ  = main.o AWS/src/aws_iot_mqtt_embedded_client_wrapper.o AWS/src/MQTTClient.o AWS/src/MQTTConnectClient.o AWS/src/MQTTConnectServer.o AWS/src/MQTTDeserializePublish.o AWS/src/MQTTFormat.o AWS/src/MQTTPacket.o AWS/src/MQTTSerializePublish.o AWS/src/MQTTSubscribeClient.o AWS/src/MQTTSubscribeServer.o AWS/src/MQTTUnsubscribeClient.o AWS/src/MQTTUnsubscribeServer.o AWS/src/network_mbedtls_wrapper.o AWS/src/timer.o mbedtls_lib/library/aes.o mbedtls_lib/library/aesni.o mbedtls_lib/library/arc4.o mbedtls_lib/library/asn1parse.o mbedtls_lib/library/asn1write.o mbedtls_lib/library/base64.o mbedtls_lib/library/bignum.o mbedtls_lib/library/blowfish.o mbedtls_lib/library/camellia.o mbedtls_lib/library/ccm.o mbedtls_lib/library/certs.o mbedtls_lib/library/cipher.o mbedtls_lib/library/cipher_wrap.o mbedtls_lib/library/ctr_drbg.o mbedtls_lib/library/debug.o mbedtls_lib/library/des.o mbedtls_lib/library/dhm.o mbedtls_lib/library/ecdh.o mbedtls_lib/library/ecdsa.o mbedtls_lib/library/ecp.o mbedtls_lib/library/ecp_curves.o mbedtls_lib/library/entropy.o mbedtls_lib/library/entropy_poll.o mbedtls_lib/library/error.o mbedtls_lib/library/gcm.o mbedtls_lib/library/havege.o mbedtls_lib/library/hmac_drbg.o mbedtls_lib/library/md.o mbedtls_lib/library/md_wrap.o mbedtls_lib/library/md2.o mbedtls_lib/library/md4.o mbedtls_lib/library/md5.o mbedtls_lib/library/memory_buffer_alloc.o mbedtls_lib/library/net.o mbedtls_lib/library/oid.o mbedtls_lib/library/padlock.o mbedtls_lib/library/pem.o mbedtls_lib/library/pk.o mbedtls_lib/library/pk_wrap.o mbedtls_lib/library/pkcs5.o mbedtls_lib/library/pkcs11.o mbedtls_lib/library/pkcs12.o mbedtls_lib/library/pkparse.o mbedtls_lib/library/pkwrite.o mbedtls_lib/library/platform.o mbedtls_lib/library/ripemd160.o mbedtls_lib/library/rsa.o mbedtls_lib/library/sha1.o mbedtls_lib/library/sha256.o mbedtls_lib/library/sha512.o mbedtls_lib/library/ssl_cache.o mbedtls_lib/library/ssl_ciphersuites.o mbedtls_lib/library/ssl_cli.o mbedtls_lib/library/ssl_cookie.o mbedtls_lib/library/ssl_srv.o mbedtls_lib/library/ssl_ticket.o mbedtls_lib/library/ssl_tls.o mbedtls_lib/library/threading.o mbedtls_lib/library/timing.o mbedtls_lib/library/version.o mbedtls_lib/library/version_features.o mbedtls_lib/library/x509.o mbedtls_lib/library/x509_create.o mbedtls_lib/library/x509_crl.o mbedtls_lib/library/x509_crt.o mbedtls_lib/library/x509_csr.o mbedtls_lib/library/x509write_crt.o mbedtls_lib/library/x509write_csr.o mbedtls_lib/library/xtea.o $(RES)
+LINKOBJ  = main.o AWS/src/aws_iot_mqtt_embedded_client_wrapper.o AWS/src/MQTTClient.o AWS/src/MQTTConnectClient.o AWS/src/MQTTConnectServer.o AWS/src/MQTTDeserializePublish.o AWS/src/MQTTFormat.o AWS/src/MQTTPacket.o AWS/src/MQTTSerializePublish.o AWS/src/MQTTSubscribeClient.o AWS/src/MQTTSubscribeServer.o AWS/src/MQTTUnsubscribeClient.o AWS/src/MQTTUnsubscribeServer.o AWS/src/network_mbedtls_wrapper.o AWS/src/timer.o mbedtls_lib/library/aes.o mbedtls_lib/library/aesni.o mbedtls_lib/library/arc4.o mbedtls_lib/library/asn1parse.o mbedtls_lib/library/asn1write.o mbedtls_lib/library/base64.o mbedtls_lib/library/bignum.o mbedtls_lib/library/blowfish.o mbedtls_lib/library/camellia.o mbedtls_lib/library/ccm.o mbedtls_lib/library/certs.o mbedtls_lib/library/cipher.o mbedtls_lib/library/cipher_wrap.o mbedtls_lib/library/ctr_drbg.o mbedtls_lib/library/debug.o mbedtls_lib/library/des.o mbedtls_lib/library/dhm.o mbedtls_lib/library/ecdh.o mbedtls_lib/library/ecdsa.o mbedtls_lib/library/ecp.o mbedtls_lib/library/ecp_curves.o mbedtls_lib/library/entropy.o mbedtls_lib/library/entropy_poll.o mbedtls_lib/library/error.o mbedtls_lib/library/gcm.o mbedtls_lib/library/havege.o mbedtls_lib/library/hmac_drbg.o mbedtls_lib/library/md.o mbedtls_lib/library/md_wrap.o mbedtls_lib/library/md2.o mbedtls_lib/library/md4.o mbedtls_lib/library/md5.o mbedtls_lib/library/memory_buffer_alloc.o mbedtls_lib/library/net.o mbedtls_lib/library/oid.o mbedtls_lib/library/padlock.o mbedtls_lib/library/pem.o mbedtls_lib/library/pk.o mbedtls_lib/library/pk_wrap.o mbedtls_lib/library/pkcs5.o mbedtls_lib/library/pkcs11.o mbedtls_lib/library/pkcs12.o mbedtls_lib/library/pkparse.o mbedtls_lib/library/pkwrite.o mbedtls_lib/library/platform.o mbedtls_lib/library/ripemd160.o mbedtls_lib/library/rsa.o mbedtls_lib/library/sha1.o mbedtls_lib/library/sha256.o mbedtls_lib/library/sha512.o mbedtls_lib/library/ssl_cache.o mbedtls_lib/library/ssl_ciphersuites.o mbedtls_lib/library/ssl_cli.o mbedtls_lib/library/ssl_cookie.o mbedtls_lib/library/ssl_srv.o mbedtls_lib/library/ssl_ticket.o mbedtls_lib/library/ssl_tls.o mbedtls_lib/library/threading.o mbedtls_lib/library/timing.o mbedtls_lib/library/version.o mbedtls_lib/library/version_features.o mbedtls_lib/library/x509.o mbedtls_lib/library/x509_create.o mbedtls_lib/library/x509_crl.o mbedtls_lib/library/x509_crt.o mbedtls_lib/library/x509_csr.o mbedtls_lib/library/x509write_crt.o mbedtls_lib/library/x509write_csr.o mbedtls_lib/library/xtea.o $(RES)
+LIBS =  -L"D:/常用軟體/Dev-Cpp/lib" D:/常用軟體/Dev-Cpp/lib/libws2_32.a  -g3 
+INCS =  -I"D:/常用軟體/Dev-Cpp/include"  -I"./AWS/inc"  -I"./mbedtls_lib/include" 
+CXXINCS =  -I"D:/常用軟體/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"D:/常用軟體/Dev-Cpp/include/c++/3.4.2/backward"  -I"D:/常用軟體/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"D:/常用軟體/Dev-Cpp/include/c++/3.4.2"  -I"D:/常用軟體/Dev-Cpp/include"  -I"./AWS/inc"  -I"./mbedtls_lib/include" 
+BIN  = MQTT_Tool.exe
+CXXFLAGS = $(CXXINCS)   -g3
+CFLAGS = $(INCS)   -g3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before MQTT_Tool.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "MQTT_Tool.exe" $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+AWS/src/aws_iot_mqtt_embedded_client_wrapper.o: AWS/src/aws_iot_mqtt_embedded_client_wrapper.c
+	$(CC) -c AWS/src/aws_iot_mqtt_embedded_client_wrapper.c -o AWS/src/aws_iot_mqtt_embedded_client_wrapper.o $(CFLAGS)
+
+AWS/src/MQTTClient.o: AWS/src/MQTTClient.c
+	$(CC) -c AWS/src/MQTTClient.c -o AWS/src/MQTTClient.o $(CFLAGS)
+
+AWS/src/MQTTConnectClient.o: AWS/src/MQTTConnectClient.c
+	$(CC) -c AWS/src/MQTTConnectClient.c -o AWS/src/MQTTConnectClient.o $(CFLAGS)
+
+AWS/src/MQTTConnectServer.o: AWS/src/MQTTConnectServer.c
+	$(CC) -c AWS/src/MQTTConnectServer.c -o AWS/src/MQTTConnectServer.o $(CFLAGS)
+
+AWS/src/MQTTDeserializePublish.o: AWS/src/MQTTDeserializePublish.c
+	$(CC) -c AWS/src/MQTTDeserializePublish.c -o AWS/src/MQTTDeserializePublish.o $(CFLAGS)
+
+AWS/src/MQTTFormat.o: AWS/src/MQTTFormat.c
+	$(CC) -c AWS/src/MQTTFormat.c -o AWS/src/MQTTFormat.o $(CFLAGS)
+
+AWS/src/MQTTPacket.o: AWS/src/MQTTPacket.c
+	$(CC) -c AWS/src/MQTTPacket.c -o AWS/src/MQTTPacket.o $(CFLAGS)
+
+AWS/src/MQTTSerializePublish.o: AWS/src/MQTTSerializePublish.c
+	$(CC) -c AWS/src/MQTTSerializePublish.c -o AWS/src/MQTTSerializePublish.o $(CFLAGS)
+
+AWS/src/MQTTSubscribeClient.o: AWS/src/MQTTSubscribeClient.c
+	$(CC) -c AWS/src/MQTTSubscribeClient.c -o AWS/src/MQTTSubscribeClient.o $(CFLAGS)
+
+AWS/src/MQTTSubscribeServer.o: AWS/src/MQTTSubscribeServer.c
+	$(CC) -c AWS/src/MQTTSubscribeServer.c -o AWS/src/MQTTSubscribeServer.o $(CFLAGS)
+
+AWS/src/MQTTUnsubscribeClient.o: AWS/src/MQTTUnsubscribeClient.c
+	$(CC) -c AWS/src/MQTTUnsubscribeClient.c -o AWS/src/MQTTUnsubscribeClient.o $(CFLAGS)
+
+AWS/src/MQTTUnsubscribeServer.o: AWS/src/MQTTUnsubscribeServer.c
+	$(CC) -c AWS/src/MQTTUnsubscribeServer.c -o AWS/src/MQTTUnsubscribeServer.o $(CFLAGS)
+
+AWS/src/network_mbedtls_wrapper.o: AWS/src/network_mbedtls_wrapper.c
+	$(CC) -c AWS/src/network_mbedtls_wrapper.c -o AWS/src/network_mbedtls_wrapper.o $(CFLAGS)
+
+AWS/src/timer.o: AWS/src/timer.c
+	$(CC) -c AWS/src/timer.c -o AWS/src/timer.o $(CFLAGS)
+
+mbedtls_lib/library/aes.o: mbedtls_lib/library/aes.c
+	$(CC) -c mbedtls_lib/library/aes.c -o mbedtls_lib/library/aes.o $(CFLAGS)
+
+mbedtls_lib/library/aesni.o: mbedtls_lib/library/aesni.c
+	$(CC) -c mbedtls_lib/library/aesni.c -o mbedtls_lib/library/aesni.o $(CFLAGS)
+
+mbedtls_lib/library/arc4.o: mbedtls_lib/library/arc4.c
+	$(CC) -c mbedtls_lib/library/arc4.c -o mbedtls_lib/library/arc4.o $(CFLAGS)
+
+mbedtls_lib/library/asn1parse.o: mbedtls_lib/library/asn1parse.c
+	$(CC) -c mbedtls_lib/library/asn1parse.c -o mbedtls_lib/library/asn1parse.o $(CFLAGS)
+
+mbedtls_lib/library/asn1write.o: mbedtls_lib/library/asn1write.c
+	$(CC) -c mbedtls_lib/library/asn1write.c -o mbedtls_lib/library/asn1write.o $(CFLAGS)
+
+mbedtls_lib/library/base64.o: mbedtls_lib/library/base64.c
+	$(CC) -c mbedtls_lib/library/base64.c -o mbedtls_lib/library/base64.o $(CFLAGS)
+
+mbedtls_lib/library/bignum.o: mbedtls_lib/library/bignum.c
+	$(CC) -c mbedtls_lib/library/bignum.c -o mbedtls_lib/library/bignum.o $(CFLAGS)
+
+mbedtls_lib/library/blowfish.o: mbedtls_lib/library/blowfish.c
+	$(CC) -c mbedtls_lib/library/blowfish.c -o mbedtls_lib/library/blowfish.o $(CFLAGS)
+
+mbedtls_lib/library/camellia.o: mbedtls_lib/library/camellia.c
+	$(CC) -c mbedtls_lib/library/camellia.c -o mbedtls_lib/library/camellia.o $(CFLAGS)
+
+mbedtls_lib/library/ccm.o: mbedtls_lib/library/ccm.c
+	$(CC) -c mbedtls_lib/library/ccm.c -o mbedtls_lib/library/ccm.o $(CFLAGS)
+
+mbedtls_lib/library/certs.o: mbedtls_lib/library/certs.c
+	$(CC) -c mbedtls_lib/library/certs.c -o mbedtls_lib/library/certs.o $(CFLAGS)
+
+mbedtls_lib/library/cipher.o: mbedtls_lib/library/cipher.c
+	$(CC) -c mbedtls_lib/library/cipher.c -o mbedtls_lib/library/cipher.o $(CFLAGS)
+
+mbedtls_lib/library/cipher_wrap.o: mbedtls_lib/library/cipher_wrap.c
+	$(CC) -c mbedtls_lib/library/cipher_wrap.c -o mbedtls_lib/library/cipher_wrap.o $(CFLAGS)
+
+mbedtls_lib/library/ctr_drbg.o: mbedtls_lib/library/ctr_drbg.c
+	$(CC) -c mbedtls_lib/library/ctr_drbg.c -o mbedtls_lib/library/ctr_drbg.o $(CFLAGS)
+
+mbedtls_lib/library/debug.o: mbedtls_lib/library/debug.c
+	$(CC) -c mbedtls_lib/library/debug.c -o mbedtls_lib/library/debug.o $(CFLAGS)
+
+mbedtls_lib/library/des.o: mbedtls_lib/library/des.c
+	$(CC) -c mbedtls_lib/library/des.c -o mbedtls_lib/library/des.o $(CFLAGS)
+
+mbedtls_lib/library/dhm.o: mbedtls_lib/library/dhm.c
+	$(CC) -c mbedtls_lib/library/dhm.c -o mbedtls_lib/library/dhm.o $(CFLAGS)
+
+mbedtls_lib/library/ecdh.o: mbedtls_lib/library/ecdh.c
+	$(CC) -c mbedtls_lib/library/ecdh.c -o mbedtls_lib/library/ecdh.o $(CFLAGS)
+
+mbedtls_lib/library/ecdsa.o: mbedtls_lib/library/ecdsa.c
+	$(CC) -c mbedtls_lib/library/ecdsa.c -o mbedtls_lib/library/ecdsa.o $(CFLAGS)
+
+mbedtls_lib/library/ecp.o: mbedtls_lib/library/ecp.c
+	$(CC) -c mbedtls_lib/library/ecp.c -o mbedtls_lib/library/ecp.o $(CFLAGS)
+
+mbedtls_lib/library/ecp_curves.o: mbedtls_lib/library/ecp_curves.c
+	$(CC) -c mbedtls_lib/library/ecp_curves.c -o mbedtls_lib/library/ecp_curves.o $(CFLAGS)
+
+mbedtls_lib/library/entropy.o: mbedtls_lib/library/entropy.c
+	$(CC) -c mbedtls_lib/library/entropy.c -o mbedtls_lib/library/entropy.o $(CFLAGS)
+
+mbedtls_lib/library/entropy_poll.o: mbedtls_lib/library/entropy_poll.c
+	$(CC) -c mbedtls_lib/library/entropy_poll.c -o mbedtls_lib/library/entropy_poll.o $(CFLAGS)
+
+mbedtls_lib/library/error.o: mbedtls_lib/library/error.c
+	$(CC) -c mbedtls_lib/library/error.c -o mbedtls_lib/library/error.o $(CFLAGS)
+
+mbedtls_lib/library/gcm.o: mbedtls_lib/library/gcm.c
+	$(CC) -c mbedtls_lib/library/gcm.c -o mbedtls_lib/library/gcm.o $(CFLAGS)
+
+mbedtls_lib/library/havege.o: mbedtls_lib/library/havege.c
+	$(CC) -c mbedtls_lib/library/havege.c -o mbedtls_lib/library/havege.o $(CFLAGS)
+
+mbedtls_lib/library/hmac_drbg.o: mbedtls_lib/library/hmac_drbg.c
+	$(CC) -c mbedtls_lib/library/hmac_drbg.c -o mbedtls_lib/library/hmac_drbg.o $(CFLAGS)
+
+mbedtls_lib/library/md.o: mbedtls_lib/library/md.c
+	$(CC) -c mbedtls_lib/library/md.c -o mbedtls_lib/library/md.o $(CFLAGS)
+
+mbedtls_lib/library/md_wrap.o: mbedtls_lib/library/md_wrap.c
+	$(CC) -c mbedtls_lib/library/md_wrap.c -o mbedtls_lib/library/md_wrap.o $(CFLAGS)
+
+mbedtls_lib/library/md2.o: mbedtls_lib/library/md2.c
+	$(CC) -c mbedtls_lib/library/md2.c -o mbedtls_lib/library/md2.o $(CFLAGS)
+
+mbedtls_lib/library/md4.o: mbedtls_lib/library/md4.c
+	$(CC) -c mbedtls_lib/library/md4.c -o mbedtls_lib/library/md4.o $(CFLAGS)
+
+mbedtls_lib/library/md5.o: mbedtls_lib/library/md5.c
+	$(CC) -c mbedtls_lib/library/md5.c -o mbedtls_lib/library/md5.o $(CFLAGS)
+
+mbedtls_lib/library/memory_buffer_alloc.o: mbedtls_lib/library/memory_buffer_alloc.c
+	$(CC) -c mbedtls_lib/library/memory_buffer_alloc.c -o mbedtls_lib/library/memory_buffer_alloc.o $(CFLAGS)
+
+mbedtls_lib/library/net.o: mbedtls_lib/library/net.c
+	$(CC) -c mbedtls_lib/library/net.c -o mbedtls_lib/library/net.o $(CFLAGS)
+
+mbedtls_lib/library/oid.o: mbedtls_lib/library/oid.c
+	$(CC) -c mbedtls_lib/library/oid.c -o mbedtls_lib/library/oid.o $(CFLAGS)
+
+mbedtls_lib/library/padlock.o: mbedtls_lib/library/padlock.c
+	$(CC) -c mbedtls_lib/library/padlock.c -o mbedtls_lib/library/padlock.o $(CFLAGS)
+
+mbedtls_lib/library/pem.o: mbedtls_lib/library/pem.c
+	$(CC) -c mbedtls_lib/library/pem.c -o mbedtls_lib/library/pem.o $(CFLAGS)
+
+mbedtls_lib/library/pk.o: mbedtls_lib/library/pk.c
+	$(CC) -c mbedtls_lib/library/pk.c -o mbedtls_lib/library/pk.o $(CFLAGS)
+
+mbedtls_lib/library/pk_wrap.o: mbedtls_lib/library/pk_wrap.c
+	$(CC) -c mbedtls_lib/library/pk_wrap.c -o mbedtls_lib/library/pk_wrap.o $(CFLAGS)
+
+mbedtls_lib/library/pkcs5.o: mbedtls_lib/library/pkcs5.c
+	$(CC) -c mbedtls_lib/library/pkcs5.c -o mbedtls_lib/library/pkcs5.o $(CFLAGS)
+
+mbedtls_lib/library/pkcs11.o: mbedtls_lib/library/pkcs11.c
+	$(CC) -c mbedtls_lib/library/pkcs11.c -o mbedtls_lib/library/pkcs11.o $(CFLAGS)
+
+mbedtls_lib/library/pkcs12.o: mbedtls_lib/library/pkcs12.c
+	$(CC) -c mbedtls_lib/library/pkcs12.c -o mbedtls_lib/library/pkcs12.o $(CFLAGS)
+
+mbedtls_lib/library/pkparse.o: mbedtls_lib/library/pkparse.c
+	$(CC) -c mbedtls_lib/library/pkparse.c -o mbedtls_lib/library/pkparse.o $(CFLAGS)
+
+mbedtls_lib/library/pkwrite.o: mbedtls_lib/library/pkwrite.c
+	$(CC) -c mbedtls_lib/library/pkwrite.c -o mbedtls_lib/library/pkwrite.o $(CFLAGS)
+
+mbedtls_lib/library/platform.o: mbedtls_lib/library/platform.c
+	$(CC) -c mbedtls_lib/library/platform.c -o mbedtls_lib/library/platform.o $(CFLAGS)
+
+mbedtls_lib/library/ripemd160.o: mbedtls_lib/library/ripemd160.c
+	$(CC) -c mbedtls_lib/library/ripemd160.c -o mbedtls_lib/library/ripemd160.o $(CFLAGS)
+
+mbedtls_lib/library/rsa.o: mbedtls_lib/library/rsa.c
+	$(CC) -c mbedtls_lib/library/rsa.c -o mbedtls_lib/library/rsa.o $(CFLAGS)
+
+mbedtls_lib/library/sha1.o: mbedtls_lib/library/sha1.c
+	$(CC) -c mbedtls_lib/library/sha1.c -o mbedtls_lib/library/sha1.o $(CFLAGS)
+
+mbedtls_lib/library/sha256.o: mbedtls_lib/library/sha256.c
+	$(CC) -c mbedtls_lib/library/sha256.c -o mbedtls_lib/library/sha256.o $(CFLAGS)
+
+mbedtls_lib/library/sha512.o: mbedtls_lib/library/sha512.c
+	$(CC) -c mbedtls_lib/library/sha512.c -o mbedtls_lib/library/sha512.o $(CFLAGS)
+
+mbedtls_lib/library/ssl_cache.o: mbedtls_lib/library/ssl_cache.c
+	$(CC) -c mbedtls_lib/library/ssl_cache.c -o mbedtls_lib/library/ssl_cache.o $(CFLAGS)
+
+mbedtls_lib/library/ssl_ciphersuites.o: mbedtls_lib/library/ssl_ciphersuites.c
+	$(CC) -c mbedtls_lib/library/ssl_ciphersuites.c -o mbedtls_lib/library/ssl_ciphersuites.o $(CFLAGS)
+
+mbedtls_lib/library/ssl_cli.o: mbedtls_lib/library/ssl_cli.c
+	$(CC) -c mbedtls_lib/library/ssl_cli.c -o mbedtls_lib/library/ssl_cli.o $(CFLAGS)
+
+mbedtls_lib/library/ssl_cookie.o: mbedtls_lib/library/ssl_cookie.c
+	$(CC) -c mbedtls_lib/library/ssl_cookie.c -o mbedtls_lib/library/ssl_cookie.o $(CFLAGS)
+
+mbedtls_lib/library/ssl_srv.o: mbedtls_lib/library/ssl_srv.c
+	$(CC) -c mbedtls_lib/library/ssl_srv.c -o mbedtls_lib/library/ssl_srv.o $(CFLAGS)
+
+mbedtls_lib/library/ssl_ticket.o: mbedtls_lib/library/ssl_ticket.c
+	$(CC) -c mbedtls_lib/library/ssl_ticket.c -o mbedtls_lib/library/ssl_ticket.o $(CFLAGS)
+
+mbedtls_lib/library/ssl_tls.o: mbedtls_lib/library/ssl_tls.c
+	$(CC) -c mbedtls_lib/library/ssl_tls.c -o mbedtls_lib/library/ssl_tls.o $(CFLAGS)
+
+mbedtls_lib/library/threading.o: mbedtls_lib/library/threading.c
+	$(CC) -c mbedtls_lib/library/threading.c -o mbedtls_lib/library/threading.o $(CFLAGS)
+
+mbedtls_lib/library/timing.o: mbedtls_lib/library/timing.c
+	$(CC) -c mbedtls_lib/library/timing.c -o mbedtls_lib/library/timing.o $(CFLAGS)
+
+mbedtls_lib/library/version.o: mbedtls_lib/library/version.c
+	$(CC) -c mbedtls_lib/library/version.c -o mbedtls_lib/library/version.o $(CFLAGS)
+
+mbedtls_lib/library/version_features.o: mbedtls_lib/library/version_features.c
+	$(CC) -c mbedtls_lib/library/version_features.c -o mbedtls_lib/library/version_features.o $(CFLAGS)
+
+mbedtls_lib/library/x509.o: mbedtls_lib/library/x509.c
+	$(CC) -c mbedtls_lib/library/x509.c -o mbedtls_lib/library/x509.o $(CFLAGS)
+
+mbedtls_lib/library/x509_create.o: mbedtls_lib/library/x509_create.c
+	$(CC) -c mbedtls_lib/library/x509_create.c -o mbedtls_lib/library/x509_create.o $(CFLAGS)
+
+mbedtls_lib/library/x509_crl.o: mbedtls_lib/library/x509_crl.c
+	$(CC) -c mbedtls_lib/library/x509_crl.c -o mbedtls_lib/library/x509_crl.o $(CFLAGS)
+
+mbedtls_lib/library/x509_crt.o: mbedtls_lib/library/x509_crt.c
+	$(CC) -c mbedtls_lib/library/x509_crt.c -o mbedtls_lib/library/x509_crt.o $(CFLAGS)
+
+mbedtls_lib/library/x509_csr.o: mbedtls_lib/library/x509_csr.c
+	$(CC) -c mbedtls_lib/library/x509_csr.c -o mbedtls_lib/library/x509_csr.o $(CFLAGS)
+
+mbedtls_lib/library/x509write_crt.o: mbedtls_lib/library/x509write_crt.c
+	$(CC) -c mbedtls_lib/library/x509write_crt.c -o mbedtls_lib/library/x509write_crt.o $(CFLAGS)
+
+mbedtls_lib/library/x509write_csr.o: mbedtls_lib/library/x509write_csr.c
+	$(CC) -c mbedtls_lib/library/x509write_csr.c -o mbedtls_lib/library/x509write_csr.o $(CFLAGS)
+
+mbedtls_lib/library/xtea.o: mbedtls_lib/library/xtea.c
+	$(CC) -c mbedtls_lib/library/xtea.c -o mbedtls_lib/library/xtea.o $(CFLAGS)

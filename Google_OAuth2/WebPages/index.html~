@@ -1,0 +1,57 @@
+<html><head><title>Google Oauth2.0 Test</title>
+<script>
+	var AUTH_URL = "https://accounts.google.com/o/oauth2/auth?";
+	var CLIENT_ID = "@03";
+	var REDIRECT_URI = "http://localhost:100/oauthcallback";
+	var SCOPE = "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.compose https://www.googleapis.com/auth/userinfo.email";
+	var RESPONSE_TYPE = "code";
+
+	function auth_redirect_uri(){
+		var Redirect_Str = AUTH_URL+"client_id="+CLIENT_ID+"&device_id=TEST&device_name=TEST&redirect_uri="+REDIRECT_URI+"&scope="+SCOPE+"&response_type="+RESPONSE_TYPE;
+		document.location.href=Redirect_Str;
+	}
+
+	var timeid;
+	function g_5s(){
+		timeid=setInterval(function(){
+		var req;
+		if(window.XMLHttpRequest){
+			req=new XMLHttpRequest();
+		}
+		else if(window.ActiveXObject){
+			req=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		else{
+			return;
+		}
+		req.onreadystatechange = function() {
+			if (req.readyState==4&&req.status==200){
+				document.getElementById("mail_id").innerHTML=req.responseText;
+				clearTimeout(timeid);
+			}
+		};
+		req.open("GET", "update.html");
+		req.send(null);},3000);}
+</script>
+</head><body>
+<style>
+	.s1{font-size:20px;width:100%;font-weight:bold;background:linear-gradient(to right,#ACD,#FFF);}
+	.s2{font-size:14px;height:24px;width:80px;padding-left:10px;display:inline-block;}
+	.s3{height:50px;padding-left:10px;}
+</style>
+<table border="1" style"width:100%">
+<tr><td>
+	<table>
+		<tr><td style="height:50px;padding-left:10px;">
+			<div class="s1">Google Oauth2.0 Test</div>
+		</td></tr>
+		<tr><td class="s3">
+			<span class="s2">Account</span>
+			<span id="mail_id" style="font-weight:bold;">@00</span>
+			<input style="font-weight:bold;" value="@01" onclick="auth_redirect_uri();" type="button">
+			<br><br><br><br><br>
+		</td></tr>		
+	</table>
+</td></tr>
+<tr><td colspan="2"><a style="padding-left:20px;font-size:10px;color:#666">&copy; 2010-2016, John_Yeh, Inc. All rights reserved.<a></td></tr>
+</table><script>@02</script><body></html>
